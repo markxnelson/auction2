@@ -1,0 +1,4 @@
+{
+    "modules": [ "servlet", "jsp", "jpa" ]
+}
+

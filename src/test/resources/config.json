@@ -1,0 +1,24 @@
+{
+    "Application": {
+	"name": "Simple Auction WebApp",
+	"archiveFile": "auction.war"
+    },
+    "Domain": {
+	"name": "appdomain",
+	"username": "weblogic",
+	"password": "w31c0m31"
+    },
+    "DataSource": {
+	"name": "MyDataSource",
+	"type": "GENERIC",
+        "jndiName": "jdbc/AuctionDB", 
+        "driverClass": "oracle.jdbc.OracleDriver",
+        "url": "jdbc:oracle:thin:@//slcac802.us.oracle.com:1522/rpoc.us.oracle.com",
+	"username": "rpoc",
+	"password": "welcome1"
+    },
+    "Server": {
+	"name": "AdminServer"
+    }
+}
+
