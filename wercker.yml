@@ -4,12 +4,11 @@
 # http://devcenter.wercker.com/docs/containers/index.html
 
 # TODO: need to change this to use the weblogic docker image 
-box: 
-  id: store/oracle/weblogic
-  user: root
-  username: $DOCKER_STORE_USERNAME
-  password: $DOCKER_STORE_PASSWORD
-  tag: 12.2.1.2
+box: weblogic:latest
+#  id: store/oracle/weblogic
+#  username: $DOCKER_STORE_USERNAME
+#  password: $DOCKER_STORE_PASSWORD
+#  tag: 12.2.1.2
 
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
@@ -31,6 +30,6 @@ build:
     - script:
         name: echo
         code: |
-          ls -al /pipeline
+          echo "hello from echo step"
     - markxnelson/weblogic-step@0.1.0:
         config: test_data
