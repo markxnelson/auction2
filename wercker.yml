@@ -24,3 +24,5 @@ build:
         name: echo
         code: |
           echo "hello world!"
+    - weblogic-step:
+        config: test_data
