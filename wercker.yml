@@ -24,5 +24,5 @@ build:
         name: echo
         code: |
           echo "hello world!"
-    - weblogic-step:
+    - markxnelson/weblogic-step@0.1.0:
         config: test_data
