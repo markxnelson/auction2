@@ -6,7 +6,7 @@
 # TODO: need to change this to use the weblogic docker image 
 box: 
   id: store/oracle/weblogic
-  cmd: /bin/bash -c id 
+  user: root
   username: $DOCKER_STORE_USERNAME
   password: $DOCKER_STORE_PASSWORD
   tag: 12.2.1.2
