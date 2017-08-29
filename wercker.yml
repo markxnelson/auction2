@@ -1,31 +1,12 @@
-# This references a standard debian container from the
-# Docker Hub https://registry.hub.docker.com/_/debian/
-# Read more about containers on our dev center
-# http://devcenter.wercker.com/docs/containers/index.html
+# Copyright 2017, Oracle Corporation and/or affiliates.  All rights reserved.
 
-# TODO: need to change this to use the weblogic docker image 
-box: weblogic:latest
-#  id: store/oracle/weblogic
-#  username: $DOCKER_STORE_USERNAME
-#  password: $DOCKER_STORE_PASSWORD
-#  tag: 12.2.1.2
+box: 
+  id: quay.io/markxnelson/weblogic
+  username: $QUAY_IO_USERNAME
+  password: $QUAY_IO_PASSWORD
+  tag: latest
 
-# You can also use services such as databases. Read more on our dev center:
-# http://devcenter.wercker.com/docs/services/index.html
-# services:
-    # - postgres
-    # http://devcenter.wercker.com/docs/services/postgresql.html
-
-    # - mongo
-    # http://devcenter.wercker.com/docs/services/mongodb.html
-
-# This is the build pipeline. Pipelines are the core of wercker
-# Read more about pipelines on our dev center
-# http://devcenter.wercker.com/docs/pipelines/index.html
 build:
-    # Steps make up the actions in your pipeline
-    # Read more about steps on our dev center:
-    # http://devcenter.wercker.com/docs/steps/index.html
   steps:
     - script:
         name: echo
