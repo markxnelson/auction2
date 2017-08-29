@@ -4,7 +4,11 @@
 # http://devcenter.wercker.com/docs/containers/index.html
 
 # TODO: need to change this to use the weblogic docker image 
-box: store/oracle/weblogic:12.2.1.2
+box: 
+  id: store/oracle/weblogic
+  username: $DOCKER_STORE_USERNAME
+  password: $DOCKER_STORE_PASSWORD
+  tag: 12.2.1.2
 
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
