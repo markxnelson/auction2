@@ -6,6 +6,7 @@
 # TODO: need to change this to use the weblogic docker image 
 box: 
   id: store/oracle/weblogic
+  cmd: /bin/bash -c id 
   username: $DOCKER_STORE_USERNAME
   password: $DOCKER_STORE_PASSWORD
   tag: 12.2.1.2
@@ -30,6 +31,6 @@ build:
     - script:
         name: echo
         code: |
-          echo "hello world!"
+          ls -al /pipeline
     - markxnelson/weblogic-step@0.1.0:
         config: test_data
