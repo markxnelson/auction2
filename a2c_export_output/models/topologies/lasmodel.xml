@@ -1,0 +1,102 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<topology xmlns="http://xmlns.oracle.com/fmwplatform/envspec">
+  <name>lasmodel</name>
+  <version>1.0</version>
+  <databases>
+    <database id="auction_domain-database">
+      <jdbcConnectInfos>
+        <jdbcConnectInfo id="auction_domain-database-jdbc-0">
+          <url>jdbc:oracle:thin:@//slc08ujn.us.oracle.com:1521/AUCTIONDB</url>
+          <driverName>oracle.jdbc.OracleDriver</driverName>
+        </jdbcConnectInfo>
+      </jdbcConnectInfos>
+    </database>
+  </databases>
+  <domains>
+    <domain id="auction_domain-domain">
+      <name>auction_domain</name>
+      <path>/scratch/domains/auction_domain</path>
+      <version>12.2.1.3.0</version>
+      <adminCredentialRef>auction_domain-domain/ADMIN</adminCredentialRef>
+      <tuningParameters>
+        <settings>
+          <setting alias="ProductionModeEnabled">true</setting>
+        </settings>
+      </tuningParameters>
+      <domainProfile>
+        <version>1.0</version>
+        <servers>
+          <server id="AdminServer">
+            <isAdminServer>true</isAdminServer>
+          </server>
+          <server id="ManagedServer_1"/>
+        </servers>
+        <clusters>
+          <cluster id="Cluster-0">
+            <members>
+              <serverRef>ManagedServer_1</serverRef>
+            </members>
+          </cluster>
+        </clusters>
+        <migratableTargets>
+          <migratableTarget id="ManagedServer_1 (migratable)"/>
+        </migratableTargets>
+        <targeting>
+          <target>
+            <objectName>generated-servergroup-AdminServer</objectName>
+            <targetNames>
+              <targetName>AdminServer</targetName>
+            </targetNames>
+          </target>
+          <target>
+            <objectName>generated-servergroup-ManagedServer_1</objectName>
+            <targetNames>
+              <targetName>ManagedServer_1</targetName>
+            </targetNames>
+          </target>
+        </targeting>
+        <blueprintRefs>
+          <blueprintRef>
+            <name>auction_domain-blueprint</name>
+          </blueprintRef>
+        </blueprintRefs>
+      </domainProfile>
+      <dataSourceBindings>
+        <genericDataSourceBinding id="MyDataSource">
+          <dataSourceName>MyDataSource</dataSourceName>
+          <jdbcConnectInfoRef>auction_domain-database-jdbc-0</jdbcConnectInfoRef>
+          <credentialRef>jdbc/orcl</credentialRef>
+        </genericDataSourceBinding>
+      </dataSourceBindings>
+      <serverBindings>
+        <serverBinding id="AdminServer">
+          <serverRef>AdminServer</serverRef>
+          <name>AdminServer</name>
+          <listenAddress>All Local Addresses</listenAddress>
+          <sslListenPort>7002</sslListenPort>
+        </serverBinding>
+        <serverBinding id="ManagedServer_1">
+          <serverRef>ManagedServer_1</serverRef>
+          <name>ManagedServer_1</name>
+          <listenAddress>All Local Addresses</listenAddress>
+          <listenPort>7003</listenPort>
+          <sslListenPort>7503</sslListenPort>
+        </serverBinding>
+      </serverBindings>
+      <clusterBindings>
+        <clusterBinding>
+          <clusterRef>Cluster-0</clusterRef>
+          <name>Cluster-0</name>
+        </clusterBinding>
+      </clusterBindings>
+      <migratableTargetBindings>
+        <migratableTargetBinding id="auction_domain-domain/ManagedServer_1 (migratable)">
+          <migratableTargetRef>ManagedServer_1 (migratable)</migratableTargetRef>
+          <clusterRef>Cluster-0</clusterRef>
+          <name>ManagedServer_1 (migratable)</name>
+          <userPreferredServerRef>ManagedServer_1</userPreferredServerRef>
+        </migratableTargetBinding>
+      </migratableTargetBindings>
+    </domain>
+  </domains>
+</topology>

@@ -1,0 +1,81 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<blueprint xmlns="http://xmlns.oracle.com/fmwplatform/envspec">
+  <version>1.0</version>
+  <name>auction_domain-blueprint</name>
+  <resources>
+    <application id="auction">
+      <cacheInAppDirectory>false</cacheInAppDirectory>
+      <moduleType>war</moduleType>
+      <name>auction</name>
+      <securityDDModel>DDOnly</securityDDModel>
+      <sourcePath>a2c/applications/auction.war</sourcePath>
+      <validateDdSecurityData>false</validateDdSecurityData>
+    </application>
+    <jdbcSystemResource id="MyDataSource">
+      <name>MyDataSource</name>
+      <descriptorFileName>jdbc/MyDataSource-0625-jdbc.xml</descriptorFileName>
+      <type>GENERIC</type>
+      <driverParams>
+        <driverName>oracle.jdbc.OracleDriver</driverName>
+      </driverParams>
+      <poolParams>
+        <initialCapacity>1</initialCapacity>
+        <minCapacity>1</minCapacity>
+        <maxCapacity>100</maxCapacity>
+        <testTableName>SQL ISVALID</testTableName>
+        <statementCacheSize>10</statementCacheSize>
+        <statementCacheType>LRU</statementCacheType>
+      </poolParams>
+      <datasourceParams>
+        <globalTransactionProtocol>EmulateTwoPhaseCommit</globalTransactionProtocol>
+        <jndiNames>
+          <jndiName>jdbc/AuctionDB</jndiName>
+        </jndiNames>
+      </datasourceParams>
+    </jdbcSystemResource>
+    <systemProperty id="launch.use.env.classpath">
+      <name>launch.use.env.classpath</name>
+      <value>
+        <string>
+          <value>true</value>
+        </string>
+      </value>
+    </systemProperty>
+    <systemProperty id="weblogic.nodemanager.ServiceEnabled">
+      <name>weblogic.nodemanager.ServiceEnabled</name>
+      <value>
+        <string>
+          <value>true</value>
+        </string>
+      </value>
+    </systemProperty>
+    <systemProperty id="weblogic.nmservice.RotationEnabled">
+      <name>weblogic.nmservice.RotationEnabled</name>
+      <value>
+        <string>
+          <value>true</value>
+        </string>
+      </value>
+    </systemProperty>
+  </resources>
+  <appSvcGroups>
+    <appSvcGroup id="AdminServer">
+      <appServiceResource>auction</appServiceResource>
+      <appServiceResource>MyDataSource</appServiceResource>
+      <appServiceResource>launch.use.env.classpath</appServiceResource>
+    </appSvcGroup>
+    <appSvcGroup id="ManagedServer_1">
+      <appServiceResource>launch.use.env.classpath</appServiceResource>
+      <appServiceResource>weblogic.nodemanager.ServiceEnabled</appServiceResource>
+      <appServiceResource>weblogic.nmservice.RotationEnabled</appServiceResource>
+    </appSvcGroup>
+  </appSvcGroups>
+  <serverGroups>
+    <serverGroup id="generated-servergroup-AdminServer">
+      <appSvcGroup>AdminServer</appSvcGroup>
+    </serverGroup>
+    <serverGroup id="generated-servergroup-ManagedServer_1">
+      <appSvcGroup>ManagedServer_1</appSvcGroup>
+    </serverGroup>
+  </serverGroups>
+</blueprint>
